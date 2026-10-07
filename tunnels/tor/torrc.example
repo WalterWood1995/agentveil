@@ -1,0 +1,28 @@
+# Tor client for AgentVeil. Easiest: generate this file with
+#   agentveil tor-config --bundle C:\tor --bridge-file bridges.txt
+# Paths must not contain spaces or non-ASCII characters. Use Windows backslashes.
+
+SocksPort 127.0.0.1:9050 IsolateSOCKSAuth
+ControlPort 127.0.0.1:9051
+CookieAuthentication 1
+DataDirectory C:\Users\YOU\.agentveil\tor-data
+ClientOnly 1
+AvoidDiskWrites 1
+
+# --- Inside mainland China a direct Tor connection is blocked: bridges are required. ---
+# Since Tor 15, lyrebird.exe provides obfs4, webtunnel, meek and snowflake.
+UseBridges 1
+ClientTransportPlugin meek_lite,obfs2,obfs3,obfs4,scramblesuit,webtunnel exec C:\tor\tor\pluggable_transports\lyrebird.exe
+ClientTransportPlugin snowflake exec C:\tor\tor\pluggable_transports\lyrebird.exe
+# Paste bridge lines obtained from bridges.torproject.org, Telegram @GetBridgesBot,
+# or by emailing bridges@torproject.org (from Gmail / Riseup). Prefer webtunnel / obfs4.
+# Bridge webtunnel 192.0.2.1:443 FINGERPRINT url=https://example.com/path ver=0.0.1
+# Bridge obfs4 192.0.2.2:443 FINGERPRINT cert=... iat-mode=0
+
+# --- Tor over your own tunnel (sing-box/Xray on 127.0.0.1:1080) instead of bridges: ---
+# UseBridges 0
+# Socks5Proxy 127.0.0.1:1080
+
+# --- Optional: publish your AgentVeil message relay as an onion service ---
+# HiddenServiceDir C:\Users\YOU\.agentveil\relay-onion
+# HiddenServicePort 80 127.0.0.1:8787

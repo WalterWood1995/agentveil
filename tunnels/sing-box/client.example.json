@@ -1,0 +1,27 @@
+{
+  "log": { "level": "warn", "timestamp": true },
+  "inbounds": [
+    { "type": "socks", "tag": "socks-in", "listen": "127.0.0.1", "listen_port": 1080 }
+  ],
+  "outbounds": [
+    {
+      "type": "vless",
+      "tag": "proxy",
+      "server": "203.0.113.10",
+      "server_port": 443,
+      "uuid": "REPLACE-WITH-UUID",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "REPLACE-WITH-CAMOUFLAGE-SNI",
+        "utls": { "enabled": true, "fingerprint": "chrome" },
+        "reality": {
+          "enabled": true,
+          "public_key": "REPLACE-WITH-SERVER-PUBLIC-KEY",
+          "short_id": "REPLACE-WITH-SHORT-ID"
+        }
+      }
+    }
+  ],
+  "route": { "final": "proxy" }
+}

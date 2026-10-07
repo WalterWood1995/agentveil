@@ -1,0 +1,27 @@
+{
+  "log": { "level": "warn" },
+  "inbounds": [
+    {
+      "type": "vless",
+      "tag": "vless-in",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [ { "uuid": "REPLACE-WITH-UUID", "flow": "xtls-rprx-vision" } ],
+      "tls": {
+        "enabled": true,
+        "server_name": "REPLACE-WITH-CAMOUFLAGE-SNI",
+        "reality": {
+          "enabled": true,
+          "handshake": { "server": "REPLACE-WITH-CAMOUFLAGE-SNI", "server_port": 443 },
+          "private_key": "REPLACE-WITH-SERVER-PRIVATE-KEY",
+          "short_id": [ "REPLACE-WITH-SHORT-ID" ]
+        }
+      }
+    }
+  ],
+  "outbounds": [ { "type": "direct", "tag": "direct" } ],
+  "route": {
+    "rules": [ { "ip_is_private": true, "action": "reject" } ],
+    "final": "direct"
+  }
+}

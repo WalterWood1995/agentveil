@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentveil"
+version = "0.1.0"
+description = "AgentVeil: a fail-closed, tunnel-only browser for AI agents (search, fetch, browse, E2E-encrypted agent messaging)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx[socks]>=0.27",
+    "beautifulsoup4>=4.12",
+    "playwright>=1.48",
+    "pynacl>=1.5",
+    "mcp>=2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+agentveil = "agentveil.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["agentveil*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]

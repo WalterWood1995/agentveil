@@ -1,0 +1,41 @@
+# AgentVeil 配置文件。复制为 agentveil.toml 后按需修改。
+# 原则：所有流量只走 [upstream] 指定的本机隧道；隧道不通时一律拒绝（不会退回直连）。
+
+# 身份密钥、联系人等本地数据目录
+data_dir = "~/.agentveil"
+
+[upstream]
+# "tor"   —— 本机 Tor 客户端的 SocksPort（推荐；支持“每个身份独立线路”和一键换出口）
+# "socks" —— 其他本机隧道客户端的 SOCKS5 入口（sing-box / Xray / Clash / Hysteria 等）
+kind = "tor"
+host = "127.0.0.1"        # 必须是 IP，不能写域名（避免本机 DNS 查询）
+port = 9050               # Tor 专家包默认 9050；Tor Browser 自带的 Tor 是 9150；sing-box 示例是 1080
+isolate = true            # Tor：每个身份用随机 SOCKS 凭据 → 独立线路、独立出口 IP
+control_port = 9051       # Tor 控制端口（用于 new_identity 换线路）；不用时设为 0
+# control_password = ""   # 若 torrc 用 HashedControlPassword；默认走 cookie 认证
+# username = ""           # 仅 kind="socks" 且隧道要求认证时填写
+# password = ""
+
+[policy]
+https_only = true                 # 普通网站强制 HTTPS（.onion 除外，Tor 已端到端加密）
+block_private_networks = true     # 禁止访问 127.0.0.1 / 局域网 / 云元数据等内网地址
+max_response_bytes = 5000000
+timeout = 60
+# allow_hosts = []                # 例外放行的内网主机，慎用
+
+[browser]
+javascript = true                 # 默认开启 JS；对敏感/不可信站点可在调用时关掉
+block_images = false              # 走 Tor 时开启可明显提速
+block_media = true
+max_pages = 8
+
+[search]
+# 依次尝试；Tor 下 DuckDuckGo 走其 .onion 服务，流量不出 Tor 网络
+providers = ["duckduckgo", "duckduckgo_lite", "mojeek"]
+prefer_onion = true
+# searxng_url = "http://你的searxng地址.onion"   # 自建 SearXNG 后加入 providers 列表
+
+[messaging]
+# 中继地址（建议用 Tor 洋葱服务地址，见 README “Agent 间加密通信”）
+relay_url = ""
+allow_direct_loopback_relay = false
