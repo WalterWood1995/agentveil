@@ -9,5 +9,5 @@ $json = $mcp | ConvertTo-Json -Depth 5
 [IO.File]::WriteAllText((Join-Path $Root '.mcp.json'), $json, (New-Object Text.UTF8Encoding $false))
 Write-Host ''
 Write-Host 'Installed. Next steps:'
-Write-Host '  1. Start your tunnel (Tor or sing-box), see INSTALL-CN.md / README.md'
+Write-Host '  1. Start your tunnel (Tor or sing-box), see INSTALL.md'
 Write-Host "  2. Self-test:  `"$py`" -m agentveil status --deep"

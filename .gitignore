@@ -6,3 +6,4 @@ agentveil.toml
 *.tmp
 .mcp.json
 dist/
+local/

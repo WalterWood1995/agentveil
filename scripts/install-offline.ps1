@@ -10,10 +10,10 @@ if ($root -match '\s' -or $root -match '[^\x00-\x7F]') {
 
 Write-Host '[1/4] virtual environment'
 if (-not (Get-Command py -ErrorAction SilentlyContinue)) {
-    throw 'Python launcher "py" not found. Install Python 3.13 x64 first (see INSTALL-CN.md), tick "Add to PATH".'
+    throw 'Python launcher "py" not found. Install Python 3.13 x64 first (see INSTALL.md), tick "Add to PATH".'
 }
 py -3.13 -m venv .venv
-if ($LASTEXITCODE -ne 0) { throw 'Python 3.13 not found. Install Python 3.13 x64 first (see INSTALL-CN.md).' }
+if ($LASTEXITCODE -ne 0) { throw 'Python 3.13 not found. Install Python 3.13 x64 first (see INSTALL.md).' }
 $py = Join-Path $root '.venv\Scripts\python.exe'
 
 Write-Host '[2/4] packages (offline)'

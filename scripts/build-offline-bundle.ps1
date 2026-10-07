@@ -12,7 +12,7 @@ if (Test-Path $stage) { Remove-Item -Recurse -Force $stage }
 New-Item -ItemType Directory -Force $stage | Out-Null
 
 Write-Host '[1/5] source'
-foreach ($item in 'agentveil', 'scripts', 'tunnels', 'tests', 'pyproject.toml', 'README.md', 'INSTALL-CN.md', 'LICENSE', 'agentveil.example.toml') {
+foreach ($item in 'agentveil', 'scripts', 'tunnels', 'tests', 'pyproject.toml', 'README.md', 'INSTALL.md', 'LICENSE', 'agentveil.example.toml') {
     Copy-Item -Recurse (Join-Path $root $item) $stage
 }
 Get-ChildItem $stage -Recurse -Directory -Filter '__pycache__' | Remove-Item -Recurse -Force

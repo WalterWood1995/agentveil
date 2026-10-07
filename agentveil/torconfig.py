@@ -60,7 +60,7 @@ def build_torrc(
         host, _, port = via_socks.rpartition(":")
         if not host or not port.isdigit():
             raise TorConfigError("--via-socks must look like 127.0.0.1:1080")
-        lines += ["# Tor over your own tunnel: the censor only sees the tunnel, the tunnel only sees Tor.",
+        lines += ["# Tor over your own tunnel: the proxy only sees Tor traffic.",
                   f"Socks5Proxy {host}:{port}"]
 
     chosen: list[str] = [ln.strip() for ln in (bridge_lines or []) if ln.strip() and not ln.strip().startswith("#")]

@@ -9,7 +9,7 @@ DataDirectory C:\Users\YOU\.agentveil\tor-data
 ClientOnly 1
 AvoidDiskWrites 1
 
-# --- Inside mainland China a direct Tor connection is blocked: bridges are required. ---
+# --- Bridges: only needed where direct Tor connections do not work. ---
 # Since Tor 15, lyrebird.exe provides obfs4, webtunnel, meek and snowflake.
 UseBridges 1
 ClientTransportPlugin meek_lite,obfs2,obfs3,obfs4,scramblesuit,webtunnel exec C:\tor\tor\pluggable_transports\lyrebird.exe
